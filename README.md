@@ -51,3 +51,35 @@ openSplitScreen(options: { video1Url: string; video2Url: string; }) => any
 --------------------
 
 </docgen-api>
+
+add this in ionic App's manifest file
+```
+ <!-- Declare plugin activities here -->
+      <activity android:name="com.test.plugins.multiscreenactivity.SplitScreenActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:launchMode="singleTop"
+        android:resizeableActivity="true"
+        android:screenOrientation="fullSensor">
+      </activity>
+
+      <activity
+        android:name="com.test.plugins.multiscreenactivity.SecondScreenActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:launchMode="singleTop"
+        android:resizeableActivity="true"
+        android:screenOrientation="fullSensor"
+        android:exported="true">
+
+        <intent-filter>
+          <action android:name="com.test.plugins.multiscreenactivity.SWAP_FRAGMENTS" />
+          <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+      </activity>
+
+      <receiver android:name="com.test.plugins.multiscreenactivity.SwapReceiver"
+        android:exported="true">
+        <intent-filter>
+          <action android:name="com.test.plugins.multiscreenactivity.SWAP_FRAGMENTS" />
+        </intent-filter>
+      </receiver>
+```
